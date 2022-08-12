@@ -27,9 +27,15 @@
 
 ### **(1) Apache Airflow를 선택한 이유**
 
-이번 프로젝트에서 docker를 사용하여, 로컬 환경에 Apache Airflow를 구성한 이유는  
+이번 프로젝트에서 Apache Airflow를 구성한 이유는 정기적으로 API 애플리케이션에 요청해서 Open API의 검색 엔진으로부터 데이터를 추가 수집하도록 처리하기 위해서 입니다. 
+
+더 나아가 적재된 MongoDB 데이터베이스의 데이터를 Operator를 사용하여 작성한 Task를 통해 정제하고, 적재하도록 합니다.  
 
 ### **(2) API 어플리케이션 개발시, Fast API 프레임워크를 선택한 이유 **
+
+Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 도커 컨테이너 이미지로 만들 수 있도록 도와주는 웹 프레임워크이며, 비동기 처리를 지원하기 때문입니다. 데이터 수집에 있어, 비동기 처리는 특정 프로세스의 처리에 시간이 걸리더라도 그 시간동안 다른 작업을 처리할 수 있기 때문에 자원을 효율적으로 사용할 수 있다는 장점이 있다.
+
+따라서 외부 API로부터 데이터 수집시 발생하는 Network I/O 바운드에서도 효율적으로 자원을 사용하여 요청을 처리할 수 있다. 
 
 
 ## **Data Visualization**
@@ -63,19 +69,24 @@
 
 ## **How to Run This Project** 
 
-1. 
+1. Fast API Docker 이미지 빌드
+    ```zsh
+    $docker build -t fastapi/v1 .
+    ```
 
-2. 
+2. docker-compose.yml 파일을 실행하여 FastAPI의 Docker container를 생성한다.
 
-3.
+    ```zsh
+    $docker-compose up -d
+    ```
+
+3. 생성한
 
 4.
 
 5.
 
-docker build -t fastapi/v1 .
 
-docker run -p 8000:80 fastapi/v1
 
 uvicorn api.main:app --reload
 
