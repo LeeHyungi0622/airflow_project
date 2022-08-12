@@ -78,15 +78,15 @@ Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 �
 
 3. 브라우저에서 `localhost:8000/`로 접속하여 생성한 FastAPI Docker Container로 접속이 가능한지 확인을 한다. 
 
-4. 
+4. 프로젝트 폴더의 airflow 폴더 내로 이동하고, docker-compose.yml 파일을 실행하여 Apache Airflow의 Docker container를 생성한다.
 
-5.
+    ```zsh
+    $docker-compose up -d
+    ```
 
+5. airflow 폴더 하위에 실행하고자 하는 Task들로 구성된 Dag 파일을 작성한다. 이는 Scheduler에 의해 parsing되어 생성된 DagRun object와 Task Object Instance가 MetaStore로 상태 정보와 함께 생성된다. 
 
-
-uvicorn api.main:app --reload
-
-Apache Airflow Docker container 실행
+6. 
 
 
 ## Lessons Learned
