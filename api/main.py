@@ -1,14 +1,14 @@
-from fastapi import FastAPI
-from typing import Optional
+from fastapi import FastAPI, Request
 
 app = FastAPI()
 
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+def root():
+    return {"Path": "Root"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+@app.get("/search")
+def read_item(request: Request, q: str):
+    print({"request": request, "q": q})
+
