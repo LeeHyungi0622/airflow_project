@@ -8,7 +8,6 @@ app = FastAPI()
 def root():
     return {"Path": "Root"}
 
-
 @app.get("/search")
 def read_item(request: Request, q: str):
     print({"request": request, "q": q})
