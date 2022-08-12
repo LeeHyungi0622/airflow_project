@@ -31,7 +31,7 @@
 
 더 나아가 적재된 MongoDB 데이터베이스의 데이터를 Operator를 사용하여 작성한 Task를 통해 정제하고, 적재하도록 합니다.  
 
-### **(2) API 어플리케이션 개발시, Fast API 프레임워크를 선택한 이유 **
+### **(2) API 어플리케이션 개발시, Fast API 프레임워크를 선택한 이유**
 
 Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 도커 컨테이너 이미지로 만들 수 있도록 도와주는 웹 프레임워크이며, 비동기 처리를 지원하기 때문입니다. 데이터 수집에 있어, 비동기 처리는 특정 프로세스의 처리에 시간이 걸리더라도 그 시간동안 다른 작업을 처리할 수 있기 때문에 자원을 효율적으로 사용할 수 있다는 장점이 있다.
 
@@ -78,13 +78,22 @@ Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 �
 
 3. 브라우저에서 `localhost:8000/`로 접속하여 생성한 FastAPI Docker Container로 접속이 가능한지 확인을 한다. 
 
-4. 프로젝트 폴더의 airflow 폴더 내로 이동하고, docker-compose.yml 파일을 실행하여 Apache Airflow의 Docker container를 생성한다.
+4. 프로젝트 폴더의 airflow 폴더 내로 이동한 후 airflow 폴더의 하위에 .env 파일을 생성하여 아래와 같이 환경변수를 입력한다. 
+    
+    ```zsh
+    AIRFLOW_IMAGE_NAME=apache/airflow:2.3.0
+    AIRFLOW_UID=50000
+    ```
+
+5. docker-compose.yml 파일을 실행하여 Apache Airflow의 Docker container를 생성한다.
 
     ```zsh
     $docker-compose up -d
     ```
 
-5. airflow 폴더 하위에 실행하고자 하는 Task들로 구성된 Dag 파일을 작성한다. 이는 Scheduler에 의해 parsing되어 생성된 DagRun object와 Task Object Instance가 MetaStore로 상태 정보와 함께 생성된다. 
+6. airflow 폴더 하위에 실행하고자 하는 Task들로 구성된 Dag 파일을 작성한다. (`DAG파일은 airflow/dags 폴더의 하위에 위치`)
+
+    이는 Scheduler에 의해 parsing되어 생성된 DagRun object와 Task Object Instance가 MetaStore로 상태 정보와 함께 생성된다. 
 
 6. 
 
