@@ -1,7 +1,7 @@
 # odmantic
 from motor.motor_asyncio import AsyncIOMotorClient
 from odmantic import AIOEngine
-from api.config import MONGO_DB_NAME, MONGO_URL
+from .config import MONGO_DB_NAME, MONGO_URL
 
 
 class MongoDB:
