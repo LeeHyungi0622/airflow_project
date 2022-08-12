@@ -15,7 +15,7 @@
 이번 프로젝트를 통해 Apache Airflow를 활용하여 DAG를 작성하고, 데이터 수집과 변환, 그리고 적재의 과정을 Operator를 사용하여 세부 Task로 분류하여 작성하는 실습을 할 것 입니다. 그리고 Fast API로 작성한 애플리케이션을 Docker로 컨테이너화하여, API request를 Apache Airflow를 통해 할 수 있도록 구성해 볼 것입니다. 
 
 
-### **[ 관련 데이터 수집 및 적재]**
+### **[Data aggregation & Loading]**
 
 - 
 
