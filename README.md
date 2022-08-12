@@ -69,20 +69,16 @@ Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 �
 
 ## **How to Run This Project** 
 
-1. Fast API Docker 이미지 빌드
-    ```zsh
-    $docker build -t fastapi/v1 .
-    ```
-
-2. docker-compose.yml 파일을 실행하여 FastAPI의 Docker container를 생성한다.
+1. 프로젝트 폴더의 api 폴더 내로 이동하고, docker-compose.yml 파일을 실행하여 FastAPI의 Docker container를 생성한다.
 
     ```zsh
+    $cd ./api
     $docker-compose up -d
     ```
 
-3. 생성한
+3. 브라우저에서 `localhost:8000/`로 접속하여 생성한 FastAPI Docker Container로 접속이 가능한지 확인을 한다. 
 
-4.
+4. 
 
 5.
 
