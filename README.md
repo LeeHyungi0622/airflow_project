@@ -123,6 +123,17 @@ API로의 요청 처리가 완료되면, MongoDB에 적재된 데이터를 읽�
 
 7. Airflow의 DAGs 메뉴를 통해서 작성한 DAG를  Trigger시켜서 제대로 Task가 실행이 되는지 확인한다.
 
+8. 프로젝트의 api 폴더 하위에 `secrets.json`파일을 생성하고 아래의 내용을 추가한다.
+
+    ```json
+    {
+        "NAVER_API_ID": [NAVER_API_ID],
+        "NAVER_API_SECRET": [NAVER_API_SECRET],
+        "MONGO_DB_NAME": "fastapi-pj",
+        "MONGO_URL": [MONGO_URL]
+    }
+    ```
+
 ## **Lessons Learned**
 
 이번 프로젝트를 통해서 본래 학습 계획에 있었던 Apache Airflow의 사용에 좀 더 익숙해지는 계기가 되었던 것 같습니다. 데이터 파이프라인의 각 각의 Task를 Operator를 사용하여 작성하고, 작성한 DAG를 통해 최종적으로 Task들을 실행해보면서, 특정 시점의 Task에서 에러가 발생시 로그를 보면서 디버깅해보는 연습도 해보았습니다.
