@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.providers.http.sensor.http import HttpSensor
+from airflow.providers.http.sensors.http import HttpSensor
 from airflow.providers.http.operators.http import SimpleHttpOperator
 
 from datetime import datetime
