@@ -39,7 +39,7 @@ Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 �
 
 <br/>
 
-### **DAG Task flow**
+## **DAG Task flow**
 
 ![Example architecture image](assets/220812_dag_flow.png)
 
@@ -123,14 +123,14 @@ API로의 요청 처리가 완료되면, MongoDB에 적재된 데이터를 읽�
 
 7. Airflow의 DAGs 메뉴를 통해서 작성한 DAG를  Trigger시켜서 제대로 Task가 실행이 되는지 확인한다.
 
-## Lessons Learned
+## **Lessons Learned**
 
 이번 프로젝트를 통해서 본래 학습 계획에 있었던 Apache Airflow의 사용에 좀 더 익숙해지는 계기가 되었던 것 같습니다. 데이터 파이프라인의 각 각의 Task를 Operator를 사용하여 작성하고, 작성한 DAG를 통해 최종적으로 Task들을 실행해보면서, 특정 시점의 Task에서 에러가 발생시 로그를 보면서 디버깅해보는 연습도 해보았습니다.
 그리고 Fast API 프레임워크를 사용하여 직접 API 애플리케이션을 만들어보고, API request를 Airflow를 통해서 정기적으로 요청하여 데이터를 수집하면서, 이전에 AWS의 EventBridge 서비스를 사용했을 때 보다 좀 더 파이프라인의 Task를 세부적으로 커스텀할 수 있다고 생각했습니다.
 
 또한 실무에서도 데이터 수집을 위해 직접 작성한 API 애플리케이션을 Airflow를 통해 정기적으로 데이터베이스에 수집되도록 해놓으면, 좀 더 효율적으로 데이터 분석가나 데이터 사이언티스트들이 업무적으로 활용할 데이터를 수집할 수 있을 것이라고 생각했습니다.
 
-## Issue
+## **Issue**
 
 (1) Dockerized Apache Airflow에서 DAG의 Task에서 사용할 connection에 대한 정의를 할 때 host를 어떻게 정의해야 될지 혼동이 되었었습니다.
 
