@@ -95,8 +95,20 @@ Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 �
 
     이는 Scheduler에 의해 parsing되어 생성된 DagRun object와 Task Object Instance가 MetaStore로 상태 정보와 함께 생성된다. 
 
-6. 
+6. Apache Airflow의 [Admin]-[Connections]에서 Docker로 띄운 Fast API 애플리케이션(localhost:8000) 컨테이너에 연결하는 객체를 생성한다.
+    
+    Connection 생성시, Host는 `host.docker.internal`로 해줘야 Docker 외부 host의 localhost로 접근이 가능하다.
 
+    ```zsh
+    Connection Id : fast_api
+    Connection Type : HTTP
+    Host : host.docker.internal
+    Login : airflow
+    Password : airflow
+    Port : 8000
+    ```
+
+7. Airflow의 DAGs 메뉴를 통해서 작성한 DAG를  Trigger시켜서 제대로 Task가 실행이 되는지 확인한다.
 
 ## Lessons Learned
 
