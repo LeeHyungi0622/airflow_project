@@ -1,13 +1,14 @@
-# **Apache Airflow를 활용한 Fast API 호출을 통해 데이터 수집**
+# **Apache Airflow를 활용한 Fast API 호출을 통해 데이터 수집 및 처리**
 
 ## **Overview**
 
-이번 프로젝트에서는 
+이번 프로젝트에서는 Apache Airflow와 Fast API 서버 애플리케이션을 Docker에 올려서 구성하였으며, Open API의 검색 엔진을 통해 데이터를 정기적으로 수집 및 처리하도록 하였습니다. 
 
+적재된 데이터는 별도의 Apache Airflow에 작성한 DAG를 통해 SQL query 처리를 하고, 별도의 데이터로 가공해서 데이터베이스에 적재합니다. 
 
 ## **Dataset**
 
-프로젝트에서 사용하게 될 데이터는 Naver 및 Kakao에서 제공되는 Open API의 검색 엔진을 활용하여 수집하였습니다. 데이터 수집은 Apache Airflow를 통해 정기적으로 데이터 수집 및 데이터베이스에 적재를 하며, 적재된 데이터는 별도의 Apache Airflow에 작성한 DAG를 통해 SQL query 처리를 하고, 별도의 데이터로 가공해서 데이터베이스에 적재합니다. 
+프로젝트에서 사용하게 될 데이터는 Naver 및 Kakao에서 제공되는 Open API의 검색 엔진을 활용하여 수집하였습니다. 
 
 ## **Objective**
 
@@ -22,7 +23,7 @@
 
 ## **Data Architecture**
 
-![Example architecture image](assets/)
+![Example architecture image](assets/220812_airflow_fastapi.png)
 
 ### **(1) Apache Airflow를 선택한 이유**
 
