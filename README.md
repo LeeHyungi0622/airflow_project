@@ -2,9 +2,9 @@
 
 ## **Overview**
 
-이번 프로젝트에서는 Apache Airflow와 Fast API 서버 애플리케이션을 Docker에 올려서 구성하였으며, Open API의 검색 엔진을 통해 데이터를 정기적으로 수집 및 처리하도록 하였습니다. 
+이번 프로젝트에서는 Apache Airflow와 Fast API 서버 애플리케이션을 Docker에 올려서 구성하였으며, Fast API 서버 애플리케이션에서 Open API의 검색 엔진을 통해 데이터를 정기적으로 수집 및 처리하도록 하였습니다. 
 
-적재된 데이터는 별도의 Apache Airflow에 작성한 DAG를 통해 SQL query 처리를 하고, 별도의 데이터로 가공해서 데이터베이스에 적재합니다. 
+적재된 데이터는 별도의 Apache Airflow에 작성한 DAG를 통해 SQL query 처리를 하고, 데이터를 가공하여 데이터베이스에 적재합니다. 
 
 ## **Dataset**
 
@@ -12,7 +12,7 @@
 
 ## **Objective**
 
-이번 프로젝트를 통해 Apache Airflow를 활용하여 DAG를 작성하고, 데이터 수집과 변환, 그리고 적재의 과정을 Operator를 사용하여 세부 Task로 분류하여 작성하는 연습을 할 것입니다. 그리고 Fast API로 작성한 어플리케이션을 Docker로 컨테이너화하여, API request를 Apache Airflow를 통해 할 수 있도록 구성해 볼 것입니다. 
+이번 프로젝트를 통해 Apache Airflow를 활용하여 DAG를 작성하고, 데이터 수집과 변환, 그리고 적재의 과정을 Operator를 사용하여 세부 Task로 분류하여 작성하는 실습을 할 것 입니다. 그리고 Fast API로 작성한 애플리케이션을 Docker로 컨테이너화하여, API request를 Apache Airflow를 통해 할 수 있도록 구성해 볼 것입니다. 
 
 
 ### **[ 관련 데이터 수집 및 적재]**
@@ -37,6 +37,19 @@ Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 �
 
 따라서 외부 API로부터 데이터 수집시 발생하는 Network I/O 바운드에서도 효율적으로 자원을 사용하여 요청을 처리할 수 있다. 
 
+<br/>
+
+### **DAG Task flow**
+
+![Example architecture image](assets/220812_dag_flow.png)
+
+DAG의 Task 흐름은 우선 is_api_available Task를 통해서 FastAPI로 요청할 API method가 호출 가능한지 확인하는 과정을 거치게 됩니다. 해당 Task가 완료되면, FastAPI로 API method를 호출하게 되고, OpenAPI의 검색 엔진으로부터 데이터를 취득해서 MongoDB에 데이터가 적재됩니다. 
+
+본 프로젝트에서는 두 OpenAPI의 검색 엔진으로부터 데이터를 수집하기 때문에 앞서 설명한 과정이 `etl_group1`, `etl_group2`로 나뉘어 병렬처리됩니다. 
+
+API로의 요청 처리가 완료되면, MongoDB에 적재된 데이터를 읽어서 데이터 전처리를 하고, 다시 전처리된 데이터를 MongoDB에 적재합니다.
+
+<br/>
 
 ## **Data Visualization**
 
@@ -119,6 +132,6 @@ Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 �
 
 ## Issue
 
-(1) Dockerized Apache Airflow에서 DAG의 Task에서 사용할 connection에 대한 정의를 할 때 어떻게 정의해야될지 혼동이 되었습니다.
+(1) Dockerized Apache Airflow에서 DAG의 Task에서 사용할 connection에 대한 정의를 할 때 host를 어떻게 정의해야 될지 혼동이 되었었습니다.
 
 `solution)` Docker 내에서 localhost는 Docker 자체의 localhost가 되기 때문에 `host.docker.internal`로 해야 host의 localhost(127.0.0.1)로 설정할 수 있습니다. 
