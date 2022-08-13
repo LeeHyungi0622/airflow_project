@@ -77,9 +77,11 @@ API로의 요청 처리가 완료되면, MongoDB에 적재된 데이터를 읽�
 
 - Docker Desktop 설치
 - 코드를 실행할 IDE (VSCODE, Sublime Text 등) 설치
+- Python : 3.6 and later
+- MongoDB : 4.0 and laters
 
 <br/>
-
+ㄴ
 ## **How to Run This Project** 
 
 1. 프로젝트 폴더의 api 폴더 내로 이동하고, docker-compose.yml 파일을 실행하여 FastAPI의 Docker container를 생성한다.
