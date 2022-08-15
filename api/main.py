@@ -18,7 +18,8 @@ async def read_item(request: Request, q: str):
     keyword = q
     # 2. 데이터 수집기로 해당 검색어에 대해 데이터를 수집
     naver_data_scrapper = NaverDataScraper()
-    books = await naver_data_scrapper.search(keyword, 10)
+    books = await naver_data_scrapper.search('book', keyword, 3)
+    print(books)
     book_models = []
     for book in books:
         print(book)
@@ -30,6 +31,7 @@ async def read_item(request: Request, q: str):
         )
         book_models.append(book_model)
     await mongodb.engine.save_all(book_models)
+    return {"result": "success"}
     # 3. DB에 수집된 데이터 저장
     # - 수집된 각각의 데이터에 대해서 DB에 들어갈 모델 인스턴스를 찍는다.
     # - 각 모델 인스턴스를 DB에 저장한다.
