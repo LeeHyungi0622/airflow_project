@@ -131,7 +131,8 @@ API로의 요청 처리가 완료되면, MongoDB에 적재된 데이터를 읽�
     {
         "NAVER_API_ID": [NAVER_API_ID],
         "NAVER_API_SECRET": [NAVER_API_SECRET],
-        "MONGO_DB_NAME": "project",
+        "KAKAO_AUTH": [KAKAO_AUTH],
+        "MONGO_DB_NAME": [MONGO_DB_NAME],
         "MONGO_URL": [MONGO_URL]
     }
     ```
