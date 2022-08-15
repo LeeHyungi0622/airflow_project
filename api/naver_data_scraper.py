@@ -1,5 +1,4 @@
 import asyncio
-from email import header
 import aiohttp
 from models.config import get_secret
 

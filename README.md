@@ -45,7 +45,7 @@ Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 �
 
 DAG의 Task 흐름은 우선 is_api_available Task를 통해서 FastAPI로 요청할 API method가 호출 가능한지 확인하는 과정을 거치게 됩니다. 해당 Task가 완료되면, FastAPI로 API method를 호출하게 되고, OpenAPI의 검색 엔진으로부터 데이터를 취득해서 MongoDB에 데이터가 적재됩니다. 
 
-본 프로젝트에서는 두 OpenAPI의 검색 엔진으로부터 데이터를 수집하기 때문에 앞서 설명한 과정이 `etl_group1`, `etl_group2`로 나뉘어 병렬처리됩니다. 
+본 프로젝트에서는 두 OpenAPI의 검색 엔진으로부터 데이터를 수집하기 때문에 앞서 설명한 과정이 `request_api_method_1`, `request_api_method_2`로 나뉘어 병렬처리됩니다. 
 
 API로의 요청 처리가 완료되면, MongoDB에 적재된 데이터를 읽어서 데이터 전처리를 하고, 다시 전처리된 데이터를 MongoDB에 적재합니다.
 
@@ -131,7 +131,7 @@ API로의 요청 처리가 완료되면, MongoDB에 적재된 데이터를 읽�
     {
         "NAVER_API_ID": [NAVER_API_ID],
         "NAVER_API_SECRET": [NAVER_API_SECRET],
-        "MONGO_DB_NAME": "fastapi-pj",
+        "MONGO_DB_NAME": "project",
         "MONGO_URL": [MONGO_URL]
     }
     ```
