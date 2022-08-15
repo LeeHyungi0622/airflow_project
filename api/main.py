@@ -1,4 +1,5 @@
-from data_scraper import DataScraper
+from naver_data_scraper import NaverDataScraper
+from kakao_data_scraper import KakaoDataScraper
 from fastapi import FastAPI, Request
 from models import mongodb
 from models.cafe import CafeModel
@@ -10,42 +11,45 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    cafe = CafeModel(cafename="cafename1", contents="contents1", datetime="datetime1", title="title1", url="url1") 
-    await mongodb.engine.save(cafe)
     return {"Path": "Root"}
 
 
-@app.get("/search")
-async def read_item(request: Request):
-    # 1. 쿼리에서 검색어 추출
+@app.get("/search/naver")
+async def read_item_from_naver(request: Request):
     keyword = "데이터 엔지니어"
-    # 2. 데이터 수집기로 해당 검색어에 대해 데이터를 수집
-    data_scrapper = DataScraper()
-    naver_cafe = await data_scrapper.search('cafearticle.json', keyword, 3)
-    kakao_cafe = await data_scrapper.search('cafe', keyword, 3)
-
-    total_result = naver_cafe + kakao_cafe
-    print(total_result)
+    
+    naver_data_scrapper = NaverDataScraper()
+    naver_cafe_result = await naver_data_scrapper.search('cafearticle.json', keyword, 3)
 
     cafe_models = []
-    for cafe in total_result:
-        print(cafe)
-        try:
-            cafe_model = CafeModel(
-                cafename=cafe["cafename"],
-                contents=cafe["description"],
-                datetime=datetime.now(),
-                title=cafe["title"],
-                url=cafe["cafeurl"] 
-            )
-        except KeyError:
-            cafe_model = CafeModel(
-                cafename=cafe["cafename"],
-                contents=cafe["contents"],
-                datetime=datetime.now(),
-                title=cafe["title"],
-                url=cafe["url"] 
-            )
+    for item in naver_cafe_result:
+        cafe_model = CafeModel(
+            cafename=item["cafename"],
+            contents=item["description"],
+            datetime=datetime.now(),
+            title=item["title"],
+            url=item["cafeurl"] 
+        )
+        cafe_models.append(cafe_model)
+    await mongodb.engine.save_all(cafe_models)
+    return {"result": "success"}
+
+@app.get("/search/kakao")
+async def read_item_from_kakao(request: Request):
+    keyword = "데이터 엔지니어"
+    kakao_data_scrapper = KakaoDataScraper()
+    naver_cafe = await kakao_data_scrapper.search('cafearticle.json', keyword, 3)
+    kakao_cafe_result = await kakao_data_scrapper.search('cafe', keyword, 3)
+
+    cafe_models = []
+    for item in kakao_cafe_result:
+        cafe_model = CafeModel(
+            cafename=item["cafename"],
+            contents=item["contents"],
+            datetime=datetime.now(),
+            title=item["title"],
+            url=item["url"] 
+        )
         cafe_models.append(cafe_model)
     await mongodb.engine.save_all(cafe_models)
     return {"result": "success"}
