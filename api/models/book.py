@@ -1,4 +1,3 @@
-from ast import keyword
 from odmantic import Model
 from typing import Optional
 
