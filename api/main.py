@@ -31,14 +31,13 @@ async def read_item_from_naver(request: Request):
             url=item["cafeurl"] 
         )
         cafe_models.append(cafe_model)
-    await mongodb.engine.save_all(cafe_models)
-    return {"result": "success"}
+    result = await mongodb.engine.save_all(cafe_models)
+    return {"result": result}
 
 @app.get("/search/kakao")
 async def read_item_from_kakao(request: Request):
     keyword = "데이터 엔지니어"
     kakao_data_scrapper = KakaoDataScraper()
-    naver_cafe = await kakao_data_scrapper.search('cafearticle.json', keyword, 3)
     kakao_cafe_result = await kakao_data_scrapper.search('cafe', keyword, 3)
 
     cafe_models = []
@@ -51,11 +50,8 @@ async def read_item_from_kakao(request: Request):
             url=item["url"] 
         )
         cafe_models.append(cafe_model)
-    await mongodb.engine.save_all(cafe_models)
-    return {"result": "success"}
-    # 3. DB에 수집된 데이터 저장
-    # - 수집된 각각의 데이터에 대해서 DB에 들어갈 모델 인스턴스를 찍는다.
-    # - 각 모델 인스턴스를 DB에 저장한다.
+    result = await mongodb.engine.save_all(cafe_models)
+    return {"result": result}
 
 
 @app.on_event("startup")

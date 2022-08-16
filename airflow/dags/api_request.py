@@ -1,8 +1,14 @@
 from airflow import DAG
 from airflow.providers.http.sensors.http import HttpSensor
-from airflow.providers.http.operators.http import SimpleHttpOperator
+from groups.group_api_request import request_api
+from airflow.operators.python import PythonOperator
 
 from datetime import datetime
+
+def _process_data(ti):
+    data = ti.xcom_pull(task_ids="request_api_method_1")
+    print(data)
+
 
 with DAG(
     "api_request_dag",
@@ -17,13 +23,11 @@ with DAG(
         endpoint='/'
     )
 
-    send_request = SimpleHttpOperator(
-        task_id='send_request',
-        method='GET',
-        http_conn_id='fast_api',
-        endpoint='/',
-        response_filter=lambda response: response.text,
-        log_response=True
+    send_api_request = request_api()
+
+    process_data = PythonOperator(
+        task_id='process_data',
+        python_callable=_process_data
     )
 
-    is_api_available >> send_request
+    is_api_available >> send_api_request >> process_data
