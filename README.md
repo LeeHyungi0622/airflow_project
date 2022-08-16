@@ -121,6 +121,10 @@ API로의 요청 처리가 완료되면, MongoDB에 적재된 데이터를 읽�
     }
     ```
 
+9. Apache Airflow(`localhost:8080`)에 접속 후 DAGs 리스트에 생성된 `api_request_dag를 Trigger`시켜서 MongoDB Compass 및 Task 세부 메뉴에서 XCom을 선택하여 Task간에 공유되는 데이터를 확인한다.
+
+<br/>
+
 ## **Lessons Learned**
 
 이번 프로젝트를 통해서 본래 학습 계획에 있었던 Apache Airflow의 사용에 좀 더 익숙해지는 계기가 되었던 것 같습니다. 데이터 파이프라인의 각 각의 Task를 Operator를 사용하여 작성하고, 작성한 DAG를 통해 최종적으로 Task들을 실행해보면서, 특정 시점의 Task에서 에러가 발생시 로그를 보면서 디버깅해보는 연습도 해보았습니다.
