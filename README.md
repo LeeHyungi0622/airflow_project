@@ -40,8 +40,11 @@ Fast API를 사용하여 아키텍처를 구성한 이유는  가장 손쉽게 �
 <br/>
 
 ## **DAG Task flow**
-
+(DAG 작성 전 DAG 흐름도 구상)
 ![Example architecture image](assets/220812_dag_flow.png)
+
+(실제 구성된 DAG 흐름도)
+![Example architecture image](assets/220816_dag_flow.png)
 
 DAG의 Task 흐름은 우선 is_api_available Task를 통해서 FastAPI로 요청할 API method가 호출 가능한지 확인하는 과정을 거치게 됩니다. 해당 Task가 완료되면, FastAPI로 API method를 호출하게 되고, OpenAPI의 검색 엔진으로부터 데이터를 취득해서 MongoDB에 데이터가 적재됩니다. 
 
