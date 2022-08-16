@@ -15,9 +15,12 @@
 이번 프로젝트를 통해 Apache Airflow를 활용하여 DAG를 작성하고, 데이터 수집과 변환, 그리고 적재의 과정을 Operator를 사용하여 세부 Task로 분류하여 작성하는 실습을 할 것 입니다. 그리고 Fast API로 작성한 애플리케이션을 Docker로 컨테이너화하여, API request를 Apache Airflow를 통해 할 수 있도록 구성해 볼 것입니다. 
 
 
-### **[Data aggregation & Loading]**
+### **[Data 수집 및 적재]**
 
-- 
+Open API 에서 검색 엔진을 활용하여 키워드가 데이터 엔지니어인 데이터를 수집하여 MongoDB에 적재 및 Airflow DAG 내에서 데이터를 공유하기 위해서 xcom에 종합적으로 저장하여 관리합니다.
+
+- Naver Open API Cafe 검색 (keyword: 데이터 엔지니어) 
+- Kakao Open API Cafe 검색 (keyword: 데이터 엔지니어)
 
 <br/>
 
@@ -53,28 +56,6 @@ DAG의 Task 흐름은 우선 is_api_available Task를 통해서 FastAPI로 요�
 API로의 요청 처리가 완료되면, MongoDB에 적재된 데이터를 읽어서 데이터 전처리를 하고, 다시 전처리된 데이터를 MongoDB에 적재합니다.
 
 <br/>
-
-## **Data Visualization**
-
-데이터 시각화는 
-
-<table>
-    <tr>
-        <th style="text-align:center">NO</th>
-        <th style="text-align:center">Image</th>
-        <th style="text-align:center">Description</th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>
-            <img src="assets/" alt="" />
-        </td>
-        <td>
-            <b>[]</b><br/>
-            <small></small>     
-        </td>
-    </tr>
-</table>
 
 ## **Prerequisites**
 
